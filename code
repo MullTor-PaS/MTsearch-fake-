@@ -1,0 +1,63 @@
+import random
+import os
+import sys
+from tabulate import tabulate
+
+
+def generate_random_words():
+    words_list = [
+        'throw', 'wonder', 'undo', 'intact', 'urge', 'isolate', 'object', 
+        'trend', 'convince', 'update', 'suggest', 'rescue', 'future', 'hero',
+        'source', 'rotate', 'planet', 'breeze', 'combine', 'random', 'motion', 'ocean'
+    ]
+    return ' '.join(random.sample(words_list, 12))
+
+
+def generate_random_hash():
+    return ''.join(random.choice('0123456789abcdef') for _ in range(64))
+
+
+def main_menu():
+    table = [
+        ["1", "Поиск кошельков"],
+        ["2", "Связь с разработчиком"],
+        ["3", "Выход"]
+    ]
+    print(tabulate(table, headers=["Выбор", "Действие"], tablefmt="grid"))
+
+
+def search_wallets():
+    print("\nНачало поиска кошельков...")
+    count = 1
+    try:
+        while True:
+            btc_amount = "0.000 BTC"
+            random_hash = generate_random_hash()
+            random_words = generate_random_words()
+            print(f"{count} | {btc_amount} | {random_hash} | {random_words}")
+            count += 1
+    except KeyboardInterrupt:
+        print("\nПоиск остановлен.")
+
+
+def contact_developer():
+    print("\nDeveloper telegram - @zllwof\nТелеграмм создателя - @zllwof\n")
+
+
+def main():
+    while True:
+        main_menu()
+        choice = input("\nВыберите действие (1-3): ")
+
+        if choice == "1":
+            search_wallets()
+        elif choice == "2":
+            contact_developer()
+        elif choice == "3":
+            print("Завершение работы...")
+            sys.exit()
+        else:
+            print("Неверный выбор, попробуйте снова.")
+
+if __name__ == "__main__":
+    main()
